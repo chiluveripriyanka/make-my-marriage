@@ -27,6 +27,7 @@ function hashToken(token: string): string {
   return createHash("sha256").update(token).digest("hex");
 }
 
+
 function sessionExpiry(): Date {
   return new Date(Date.now() + env.SESSION_TTL_DAYS * 24 * 60 * 60 * 1000);
 }

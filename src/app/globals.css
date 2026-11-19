@@ -170,9 +170,17 @@ nav a:hover,
   background: var(--paper);
 }
 .login-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0 12px;
+  white-space: nowrap;
+  line-height: 1;
+  font-weight: 600;
   background: transparent;
   color: var(--deep);
-  min-height: 44px;
+  min-height: 48px;
   font-size: 12px;
 }
 .mobile-menu {
@@ -830,6 +838,8 @@ summary:focus-visible {
     font-size: 10px;
   }
   .login-button {
+    min-height: 44px;
+    padding: 0 8px;
     font-size: 10px;
   }
   .mobile-menu {

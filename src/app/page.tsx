@@ -1,5 +1,7 @@
 import Image from "next/image";
 import PlanningButton from "./planning-button";
+import { getCurrentUserId } from "@/server/auth/session";
+import { findWedding } from "@/server/weddings/service";
 import MasterItinerary from "./master-itinerary";
 
 const features = [
@@ -70,7 +72,10 @@ function Brand() {
   );
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const userId = await getCurrentUserId();
+  const hasWedding = userId ? Boolean(await findWedding(userId)) : false;
+  const planningProps = { signedIn: Boolean(userId), hasWedding };
   return (
     <>
       <a className="skip-link" href="#main">
@@ -86,8 +91,8 @@ export default function HomePage() {
             <a href="#traditions">Traditional Ceremonies</a>
           </nav>
           <div className="header-actions">
-            <PlanningButton login />
-            <PlanningButton />
+            <PlanningButton login {...planningProps} />
+            <PlanningButton {...planningProps} />
           </div>
         </div>
         <details className="mobile-menu">
@@ -114,7 +119,7 @@ export default function HomePage() {
               families together in one harmonious place.
             </p>
             <div className="actions">
-              <PlanningButton />
+              <PlanningButton {...planningProps} />
               <a className="button secondary" href="#preview">
                 ▷ Explore the Preview
               </a>
@@ -322,7 +327,7 @@ export default function HomePage() {
               <br />
               Give your family one place to plan something unforgettable.
             </p>
-            <PlanningButton />
+            <PlanningButton {...planningProps} />
             <span className="cta-note">
               Made for couples. Shared with family.
             </span>
