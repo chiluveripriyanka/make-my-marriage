@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUserId } from "@/server/auth/session";
-import LogoutButton from "../welcome/logout-button";
+import WorkspaceShell from "./workspace-shell";
+import { UserModel } from "@/server/auth/models";
 import { findWedding } from "@/server/weddings/service";
 import type { ReactNode } from "react";
 import "./wedding.css";
@@ -14,18 +14,10 @@ export default async function WeddingLayout({
   const userId = await getCurrentUserId();
   if (!userId) redirect("/login");
   const context = await findWedding(userId);
+  const user = await UserModel.findById(userId).select("name").lean();
   return (
-    <>
-      <header className="wedding-header">
-        <Link className="brand" href="/">
-          Make My Marriage<small>Your family workspace</small>
-        </Link>
-        <div className="wedding-header-actions">
-          {context && <nav aria-label="Wedding workspace"><Link href="/app">Dashboard</Link><Link href="/app/settings/members">Wedding Team</Link></nav>}
-          <LogoutButton />
-        </div>
-      </header>
+    <WorkspaceShell wedding={context?.wedding.title || "Your Wedding"} city={context?.wedding.location?.city || ""} name={user?.name || "Wedding member"} role={context?.membership.role || "ADMIN"}>
       {children}
-    </>
+    </WorkspaceShell>
   );
 }
