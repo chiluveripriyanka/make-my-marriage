@@ -622,3 +622,5 @@
     padding: 24px;
   }
 }
+.wedding-header-actions, .wedding-header-actions nav { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+@media (max-width: 650px) { .wedding-header { flex-wrap: wrap; gap: 16px; } .wedding-header-actions, .wedding-header-actions nav { gap: 12px; } }

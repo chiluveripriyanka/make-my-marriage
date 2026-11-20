@@ -15,6 +15,7 @@ const weddingSchema = new Schema(
     },
     createdByUserId: { type: Schema.Types.ObjectId, required: true },
     deletedAt: { type: Date, default: null },
+    membershipVersion: { type: Number, default: 0 },
   },
   { timestamps: true },
 );

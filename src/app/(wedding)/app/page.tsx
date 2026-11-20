@@ -18,10 +18,11 @@ export default async function DashboardPage() {
       <Link className="button" href="/app/settings/wedding">
         Edit Wedding
       </Link>
+      <Link className="button" href="/app/settings/members">Your Wedding Team</Link>
       <section className="wedding-summary">
         <h2>A beautiful beginning</h2>
         <p>
-          Your wedding is set up. Events, tasks, guests, and family invitations
+          Your wedding team is ready to grow. Events, tasks, and guests
           will be added in the next milestones.
         </p>
         <Link href="/wedding-ready" className="text-link">

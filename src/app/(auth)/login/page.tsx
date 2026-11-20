@@ -1,2 +1,3 @@
 import AuthForm from "../auth-form";
-export default function LoginPage() { return <AuthForm mode="login" />; }
+import { tokenSchema } from "@/server/invitations/validation";
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ invitation?: string }> }) { const query = await searchParams; const token = tokenSchema.safeParse(query.invitation); return <AuthForm mode="login" invitation={token.success ? token.data : undefined} />; }
